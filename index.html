@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>College Canteen - Fresh Bites Daily</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1920&q=80")
+          no-repeat center center fixed;
+        background-size: cover;
+        position: relative;
+      }
+
+      /* ✅ FIXED overlay */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.7);
+        z-index: -1;
+      }
+
+      /* ✅ FIXED spacing */
+      section {
+        padding: 60px 20px;
+      }
+
+      /* ✅ Scroll offset fix */
+      #menu,
+      #order,
+      #contact,
+      #feedback {
+        scroll-margin-top: 80px;
+      }
+
+      /* NAVBAR */
+      nav {
+        position: sticky;
+        top: 0;
+        background: #333;
+        padding: 12px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .nav-logo {
+        color: white;
+        font-weight: bold;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+
+      .nav-links a:hover {
+        color: #ff6b6b;
+      }
+
+      /* HERO */
+      .hero {
+        background: url("https://via.placeholder.com/1920x600?text=Canteen+Hero+Image")
+          no-repeat center center/cover;
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        position: relative;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .college-logo {
+        width: 90px;
+        margin-bottom: 15px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        margin-bottom: 10px;
+        background-color: black;
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 10px;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+      }
+
+      .btn {
+        background: #ff6b6b;
+        color: white;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 25px;
+      }
+
+      .btn:hover {
+        background: #ff5252;
+      }
+
+      /* MENU */
+      .menu {
+        background: white;
+      }
+
+      .menu h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #ff6b6b;
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .item {
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+      }
+
+      .item:hover {
+        transform: translateY(-8px);
+      }
+
+      .item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .item-content {
+        padding: 15px;
+      }
+
+      /* ORDER */
+      .order-form {
+        background: #f8f9fa;
+      }
+
+      .order-form h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #ff6b6b;
+      }
+
+      .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      form {
+        display: grid;
+        gap: 15px;
+      }
+
+      input,
+      select,
+      textarea {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+
+      button {
+        background: #ff6b6b;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #ff5252;
+      }
+
+      /* CONTACT */
+      .contact {
+        background: white;
+        text-align: center;
+      }
+
+      .contact h2 {
+        color: #ff6b6b;
+        margin-bottom: 15px;
+      }
+
+      /* FEEDBACK */
+      .feedback {
+        background: #f8f9fa;
+        text-align: center;
+      }
+
+      .feedback-form {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+      }
+
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .social-links a {
+        color: #ff6b6b;
+        margin: 0 10px;
+        text-decoration: none;
+      }
+
+      /* MOBILE */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .menu-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* MODAL */
+      .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        position: relative;
+        animation: pop 0.3s ease;
+      }
+
+      .modal-content img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+
+      .close {
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        font-size: 22px;
+        cursor: pointer;
+      }
+
+      @keyframes pop {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <div class="nav-logo">🍔 LIT Canteen</div>
+      <div class="nav-links">
+        <a href="#menu">Menu</a>
+        <a href="#order">Order</a>
+        <a href="#feedback">Feedback</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <!-- <img src="logo.webp" alt="College Logo" class="college-logo" /> -->
+        <h1>Welcome to LIT Canteen</h1>
+        <p>Fresh, delicious meals made with love. Order now!</p>
+        <a href="#menu" class="btn">Explore Menu</a>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" class="menu">
+      <h2>Our Menu</h2>
+      <div class="menu-grid">
+        <div
+          class="item"
+          data-title="Veggie Burger"
+          data-desc="Juicy patty with fresh veggies."
+          data-price="₹50"
+          data-img="veg burger.webp"
+        >
+          <img src="veg burger.webp" />
+          <div class="item-content">
+            <h3>Veggie Burger</h3>
+            <p>Juicy patty with fresh veggies. ₹50</p>
+          </div>
+        </div>
+
+        <div
+          class="item"
+          data-title="Veg Noodles"
+          data-desc="Noodles with sau."
+          data-price="₹70"
+          data-img="noodles.webp"
+        >
+          <img src="noodles.webp" />
+          <div class="item-content">
+            <h3>Veg Noodles</h3>
+            <p>Noodles with sau. ₹70</p>
+          </div>
+        </div>
+
+        <div
+          class="item"
+          data-title="Pizza Slice"
+          data-desc="Cheesy and hot."
+          data-price="₹60"
+          data-img="pizza.jpg"
+        >
+          <img src="pizza.jpg" />
+          <div class="item-content">
+            <h3>Pizza Slice</h3>
+            <p>Cheesy and hot. ₹60</p>
+          </div>
+        </div>
+
+        <div
+          class="item"
+          data-title="Coffee"
+          data-desc="Rich and aromatic."
+          data-price="₹30"
+          data-img="coffee.webp"
+        >
+          <img src="coffee.webp" />
+          <div class="item-content">
+            <h3>Coffee</h3>
+            <p>Rich and aromatic. ₹30</p>
+          </div>
+        </div>
+
+        <div
+          class="item"
+          data-title="Salad Bowl"
+          data-desc="Fresh greens and dressing."
+          data-price="₹40"
+          data-img="salad bowl.webp"
+        >
+          <img src="salad bowl.webp" />
+          <div class="item-content">
+            <h3>Salad Bowl</h3>
+            <p>Fresh greens and dressing. ₹40</p>
+          </div>
+        </div>
+        <div
+          class="item"
+          data-title="Pasta"
+          data-desc="Italian delight with sauce."
+          data-price="₹80"
+          data-img="pasta.webp"
+        >
+          <img src="pasta.webp" />
+          <div class="item-content">
+            <h3>Pasta</h3>
+            <p>Italian delight with sauce. ₹80</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDER -->
+    <section class="order-form" id="order">
+      <h2>Place Your Order</h2>
+      <div class="form-container">
+        <form id="orderForm">
+          <input type="text" placeholder="Your Name" required />
+          <select id="itemSelect" required>
+            <option value="">Choose an item</option>
+            <option>Veggie Burger - ₹50</option>
+            <option>Noodles - ₹70</option>
+            <option>Pizza Slice - ₹60</option>
+            <option>Coffee - ₹30</option>
+            <option>Salad Bowl - ₹40</option>
+            <option>Pasta - ₹80</option>
+          </select>
+          <input
+            type="number"
+            id="quantity"
+            min="1"
+            placeholder="Quantity"
+            required
+            oninput="updateSummary()"
+          />
+          <input type="text" id="special" placeholder="Special Instructions" />
+
+          <div class="summary" id="summary">
+            🧾 Order Summary: <br />
+            Item: — <br />
+            Total: ₹0
+          </div>
+          <button type="submit">Place Order</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FEEDBACK -->
+    <section id="feedback" class="feedback">
+      <h2>Student Feedback</h2>
+      <form class="feedback-form">
+        <input type="text" placeholder="Your Name" required />
+        <select required>
+          <option value="">Select rating</option>
+          <option>⭐⭐⭐⭐⭐ Excellent</option>
+          <option>⭐⭐⭐⭐ Very Good</option>
+          <option>⭐⭐⭐ Good</option>
+          <option>⭐⭐ Average</option>
+          <option>⭐ Poor</option>
+        </select>
+        <textarea rows="4" placeholder="Your Feedback"></textarea>
+        <button type="submit">Submit Feedback</button>
+      </form>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+      <h2>Contact Us</h2>
+      <p>
+        📧 Email:
+        <a href="mailto:latachauhan871@gmail.com">canteen@college.edu</a>
+      </p>
+      <p>📞 Phone: <a href="tel:+919876543210">+91 98765 43210</a></p>
+    </section>
+
+    <footer>
+      <!-- <div class="social-links">
+        <a href="https://www.facebook.com/" target="_blank">
+          <i class="bi bi-facebook"></i>Facebook
+        </a>
+        |
+        <a href="https://www.instagram.com/litsarigam/" target="_blank">
+          <i class="bi bi-instagram"></i>Instagram
+        </a>
+      </div> -->
+      <div class="social-links">
+        <a href="https://www.facebook.com/" target="_blank">
+          <i class="bi bi-facebook"></i>Facebook
+        </a>
+
+        <a href="https://www.instagram.com/litsarigam/" target="_blank">
+          <i class="bi bi-instagram"></i>Instagram
+        </a>
+      </div>
+    </footer>
+
+    <script>
+      // const itemSelect = document.querySelector("select");
+      const itemSelect = document.getElementById("itemSelect");
+
+      const quantityInput = document.getElementById("quantity");
+      const summaryBox = document.getElementById("summary");
+
+      function updateSummary() {
+        const selectedItem = itemSelect.value;
+        const quantity = parseInt(quantityInput.value) || 0;
+
+        if (!selectedItem) {
+          summaryBox.innerHTML = `
+        🧾 Order Summary: <br />
+        Item: — <br />
+        Total: ₹0
+      `;
+          return;
+        }
+
+        // ✅ Price extract from text
+        const priceMatch = selectedItem.match(/₹(\d+)/);
+        const price = priceMatch ? parseInt(priceMatch[1]) : 0;
+
+        const total = price * quantity;
+
+        summaryBox.innerHTML = `
+      🧾 Order Summary: <br />
+      Item: ${selectedItem} <br />
+      Total: ₹${total}
+    `;
+      }
+
+      // ✅ Update on change
+      itemSelect.addEventListener("change", updateSummary);
+      quantityInput.addEventListener("input", updateSummary);
+
+      // Prevent form reload
+      document.getElementById("orderForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Order Submitted ✅");
+      });
+      const modal = document.getElementById("itemModal");
+      const modalImg = document.getElementById("modalImg");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalDesc = document.getElementById("modalDesc");
+      const modalPrice = document.getElementById("modalPrice");
+      const closeBtn = document.querySelector(".close");
+
+      document.querySelectorAll(".item").forEach((item) => {
+        item.addEventListener("click", () => {
+          modal.style.display = "flex";
+          modalImg.src = item.dataset.img;
+          modalTitle.textContent = item.dataset.title;
+          modalDesc.textContent = item.dataset.desc;
+          modalPrice.textContent = item.dataset.price;
+        });
+      });
+
+      closeBtn.onclick = () => (modal.style.display = "none");
+
+      window.onclick = (e) => {
+        if (e.target === modal) modal.style.display = "none";
+      };
+    </script>
+
+    <!-- ITEM DETAIL MODAL -->
+    <div id="itemModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <img id="modalImg" src="" alt="Item Image" />
+        <h3 id="modalTitle"></h3>
+        <p id="modalDesc"></p>
+        <p id="modalPrice"></p>
+      </div>
+    </div>
+  </body>
+</html>
