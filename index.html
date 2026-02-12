@@ -31,7 +31,7 @@
         position: relative;
       }
 
-      /* ✅ FIXED overlay */
+  
       body::before {
         content: "";
         position: fixed;
@@ -40,12 +40,12 @@
         z-index: -1;
       }
 
-      /* ✅ FIXED spacing */
+    
       section {
         padding: 60px 20px;
       }
 
-      /* ✅ Scroll offset fix */
+      
       #menu,
       #order,
       #contact,
@@ -541,7 +541,7 @@
           return;
         }
 
-        // ✅ Price extract from text
+        
         const priceMatch = selectedItem.match(/₹(\d+)/);
         const price = priceMatch ? parseInt(priceMatch[1]) : 0;
 
@@ -554,15 +554,23 @@
     `;
       }
 
-      // ✅ Update on change
+      
       itemSelect.addEventListener("change", updateSummary);
       quantityInput.addEventListener("input", updateSummary);
 
-      // Prevent form reload
+      
       document.getElementById("orderForm").addEventListener("submit", (e) => {
         e.preventDefault();
-        alert("Order Submitted ✅");
+
+        alert("Order Submitted ");
+        document.getElementById("orderForm").reset();
+        document.getElementById("summary").innerHTML = `
+    🧾 Order Summary: <br />
+    Item: — <br />
+    Total: ₹0
+  `;
       });
+
       const modal = document.getElementById("itemModal");
       const modalImg = document.getElementById("modalImg");
       const modalTitle = document.getElementById("modalTitle");
@@ -585,6 +593,15 @@
       window.onclick = (e) => {
         if (e.target === modal) modal.style.display = "none";
       };
+      document.querySelector(".feedback-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  alert("Feedback Submitted ");
+
+ 
+  document.querySelector(".feedback-form").reset();
+});
+
     </script>
 
     <!-- ITEM DETAIL MODAL -->
